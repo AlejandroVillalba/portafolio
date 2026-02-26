@@ -1,0 +1,52 @@
+---
+import ThemeToggle from './ThemeToggle';
+
+const navLinks = [
+  { label: 'Inicio', href: '#hero' },
+  { label: 'Sobre mí', href: '#about' },
+  { label: 'Proyectos', href: '#projects' },
+  { label: 'Contacto', href: '#contact' },
+];
+---
+
+<header
+  id="navbar"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 px-6 md:px-12"
+>
+  <nav class="max-w-6xl mx-auto flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#hero" class="text-xl font-bold font-display tracking-tight hover:opacity-70 transition-opacity">
+      ale<span class="text-indigo-500">.</span>dev
+    </a>
+
+    <!-- Links desktop -->
+    <ul class="hidden md:flex items-center gap-8">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class="text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors relative group"
+          >
+            {link.label}
+            <span class="absolute -bottom-0.5 left-0 w-0 h-px bg-indigo-500 group-hover:w-full transition-all duration-300" />
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Theme toggle -->
+    <ThemeToggle client:load />
+  </nav>
+</header>
+
+<script>
+  const navbar = document.getElementById('navbar');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      navbar?.classList.add('bg-white/80', 'dark:bg-neutral-950/80', 'backdrop-blur-md', 'border-b', 'border-neutral-200/50', 'dark:border-neutral-800/50');
+    } else {
+      navbar?.classList.remove('bg-white/80', 'dark:bg-neutral-950/80', 'backdrop-blur-md', 'border-b', 'border-neutral-200/50', 'dark:border-neutral-800/50');
+    }
+  });
+</script>
